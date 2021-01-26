@@ -26,5 +26,5 @@ This documentation is still to do. Try `artisan list` and `artisan voyager:expor
 
 If you have suggestions or questions feel free to open up a new issue or pull request.
 
-You can e-mail me at bob@madebybob.nl.
+You can e-mail me at `support@sofcode.xyz`.
 
