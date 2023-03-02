@@ -117,8 +117,10 @@ class VoyagerImportCommand extends Command
      * @return array
      */
     protected function getConfigurationEntries($table) {
+        $folder = config('voyager-config.path') . '/' . config('voyager-config.folder');
+        
         // generate file path created by `voyager:export`
-        $file_path = 'config/voyager/' . $table . '.json';
+        $file_path = $folder . '/' . $table . '.json';
         // pass current configuration path
         $json_content = $this->getConfigFileContent($file_path);
         // exit if invalid file
