@@ -18,6 +18,12 @@ This command will import all data from the `config` folder into the Voyager rela
 
 Made a mistake? Want to start again? Remove all exported data with `voyager:clean`.
 
+## Install
+
+`composer require slice-of-code-it-consultancy/voyager-config`
+
+`php artisan vendor:publish --provider=MadeByBob\\VoyagerConfig\\VoyagerConfigServiceProvider`
+
 ## Commands explained
 
 This documentation is still to do. Try `artisan list` and `artisan voyager:export --help` for more information
