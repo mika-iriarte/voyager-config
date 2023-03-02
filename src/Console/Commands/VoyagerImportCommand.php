@@ -22,23 +22,6 @@ class VoyagerImportCommand extends Command
     protected $description = 'Import all data from the config folder into the Voyager related tables.';
 
     /**
-     * The list of tables ordered for Foreign Key checks compliance.
-     *
-     * @var array
-     */
-    protected $tables = [
-        'data_types',
-        'data_rows',
-        'roles',
-        'permissions',
-        'permission_role',
-        'menus',
-        'menu_items',
-        'settings',
-        'translations',
-    ];
-
-    /**
      * Create a new command instance.
      *
      * @return void
@@ -59,7 +42,9 @@ class VoyagerImportCommand extends Command
 
         $this->info("Starting Voyager config import ...");
 
-        foreach ($this->tables as $table) {
+        $tables = config('voyager-config.tables');
+
+        foreach ($tables as $table) {
             $this->line("Importing {$table}...");
 
             // get configuration files created by `voyager:export`
@@ -67,9 +52,9 @@ class VoyagerImportCommand extends Command
 
             // check valid config entries 
             if (empty($conf_entries)) {
-                $this->info("DB changes are reverted.");
-                // stop importing configuration.
-                return;
+                $this->info("{$table} is empty");
+                // skip importing configuration for table.
+                continue;
             }
 
             // execute insert on successful parsing
