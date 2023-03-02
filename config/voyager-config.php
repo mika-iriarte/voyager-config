@@ -12,15 +12,15 @@ return [
 
   // list of the tables which belong to Voyager to export
   'tables' => [
-    'data_rows',
-    'data_types',
-    'menus',
-    'menu_items',
-    'permissions',
-    'permission_role',
-    'roles',
-    'settings',
-    'translations',
+      'data_types',
+      'data_rows',
+      'menus',
+      'menu_items',
+      'permissions',
+      'roles',
+      'permission_role',
+      'settings',
+      'translations',
   ]
 
 ];

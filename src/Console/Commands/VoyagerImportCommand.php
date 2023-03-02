@@ -12,7 +12,9 @@ class VoyagerImportCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'voyager:import';
+    protected $signature = 'voyager:import
+            {--c|clear : Clear table before import}
+            ';
 
     /**
      * The console command description.
@@ -38,11 +40,24 @@ class VoyagerImportCommand extends Command
      */
     public function handle()
     {
+        $tables = config('voyager-config.tables');
+
+        if($this->option('clear')){
+            $this->info("Clear Voyager config ...");
+
+            DB::beginTransaction();
+            DB::select('SET FOREIGN_KEY_CHECKS = 0');
+            foreach ($tables as $table) {
+
+                DB::table($table)->truncate();
+            }
+            DB::select('SET FOREIGN_KEY_CHECKS = 1');
+            DB::commit();
+        }
+
         DB::beginTransaction();
 
         $this->info("Starting Voyager config import ...");
-
-        $tables = config('voyager-config.tables');
 
         foreach ($tables as $table) {
             $this->line("Importing {$table}...");
@@ -50,7 +65,7 @@ class VoyagerImportCommand extends Command
             // get configuration files created by `voyager:export`
             $conf_entries = $this->getConfigurationEntries($table);
 
-            // check valid config entries 
+            // check valid config entries
             if (empty($conf_entries)) {
                 $this->info("{$table} is empty");
                 // skip importing configuration for table.
@@ -69,7 +84,7 @@ class VoyagerImportCommand extends Command
 
     /**
      * Get the contents of the table configuration file.
-     * 
+     *
      * @return string
      */
     protected function getConfigFileContent($file_path) {
@@ -90,7 +105,7 @@ class VoyagerImportCommand extends Command
 
     /**
      * Parse table configuration for DB insert.
-     * 
+     *
      * @return array
      */
     protected function parseConfigFileContent($json_content) {
@@ -113,12 +128,12 @@ class VoyagerImportCommand extends Command
 
     /**
      * Get the contents of the table configuration and parse for DB insert.
-     * 
+     *
      * @return array
      */
     protected function getConfigurationEntries($table) {
         $folder = config('voyager-config.path') . '/' . config('voyager-config.folder');
-        
+
         // generate file path created by `voyager:export`
         $file_path = $folder . '/' . $table . '.json';
         // pass current configuration path
