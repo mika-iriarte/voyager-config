@@ -3,6 +3,7 @@
 namespace MadeByBob\VoyagerConfig\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class VoyagerImportCommand extends Command
@@ -13,7 +14,8 @@ class VoyagerImportCommand extends Command
      * @var string
      */
     protected $signature = 'voyager:import
-            {--c|clear : Clear table before import}
+            {--c|clear : Clear tables before import}
+            {--cache : Reset menu cache }
             ';
 
     /**
@@ -80,6 +82,18 @@ class VoyagerImportCommand extends Command
         DB::commit();
 
         $this->info("Importing Voyager configuration successful!");
+
+        if($this->option('cache')) {
+
+            $this->info("Resetting menu cache...");
+
+            $menus = DB::table('menus')->get('name');
+            foreach ($menus as $menu){
+                $this->line("{$menu->name}");
+
+                Cache::forget('voyager_menu_' . $menu->name);
+            }
+        }
     }
 
     /**
