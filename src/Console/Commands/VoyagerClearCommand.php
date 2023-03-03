@@ -20,7 +20,7 @@ class VoyagerClearCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Clears Voyager\'s data from the config folder';
+    protected $description = 'Clears Voyager\'s exported config data from the config folder';
 
     /**
      * Create a new command instance.
