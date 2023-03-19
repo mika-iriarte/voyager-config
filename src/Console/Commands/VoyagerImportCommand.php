@@ -47,14 +47,14 @@ class VoyagerImportCommand extends Command
         if($this->option('clear')){
             $this->info("Clear Voyager config ...");
 
-            DB::beginTransaction();
+//            DB::beginTransaction();
             DB::select('SET FOREIGN_KEY_CHECKS = 0');
             foreach ($tables as $table) {
 
                 DB::table($table)->truncate();
             }
             DB::select('SET FOREIGN_KEY_CHECKS = 1');
-            DB::commit();
+//            DB::commit();
         }
 
         DB::beginTransaction();
