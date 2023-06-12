@@ -15,7 +15,7 @@ class VoyagerImportCommand extends Command
      */
     protected $signature = 'voyager:import
             {--c|clear : Clear tables before import}
-            {--cache : Reset menu cache }
+            {--r|cache-reset : Reset menu cache }
             ';
 
     /**
@@ -47,14 +47,12 @@ class VoyagerImportCommand extends Command
         if($this->option('clear')){
             $this->info("Clear Voyager config ...");
 
-//            DB::beginTransaction();
             DB::select('SET FOREIGN_KEY_CHECKS = 0');
             foreach ($tables as $table) {
 
                 DB::table($table)->truncate();
             }
             DB::select('SET FOREIGN_KEY_CHECKS = 1');
-//            DB::commit();
         }
 
         DB::beginTransaction();
@@ -83,7 +81,7 @@ class VoyagerImportCommand extends Command
 
         $this->info("Importing Voyager configuration successful!");
 
-        if($this->option('cache')) {
+        if($this->option('cache-reset')) {
 
             $this->info("Resetting menu cache...");
 

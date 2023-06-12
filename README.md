@@ -1,4 +1,6 @@
-# Voyager - Export
+# Voyager - Export/Import
+
+Commands for export/import Voyager menu and config
 
 
 ## Introduction
@@ -13,6 +15,12 @@ This command will export all Voyager related tables into `.json` files into the 
 ### `artisan voyager:import`
 
 This command will import all data from the `config` folder into the Voyager related tables.
+
+Additional options:
+
+`--clear | -c` — for Voyager tables before import
+
+`--cache-reset | -r` — for reset and recreate Voyager menu
 
 ### `artisan voyager:clear`
 
