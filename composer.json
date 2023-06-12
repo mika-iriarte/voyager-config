@@ -1,6 +1,6 @@
 {
-    "name": "slice-of-code-it-consultancy/voyager-config",
-    "description": "Voyager configuration in config files",
+    "name": "mika-iriarte/voyager-config",
+    "description": "Voyager menu and configuration export/import",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -11,6 +11,10 @@
         {
             "name": "Marlo Corridor",
             "email": "corridor.marlo@sofcode.xyz"
+        },
+        {
+            "name": "Mika Iriarte",
+            "homepage": "https://github.com/mika-iriarte"
         }
     ],
     "minimum-stability": "dev",
